@@ -49,7 +49,7 @@
             
             $this->repository->save();
             
-            $this->slackPost->post($this->comeback->render(), $this->command->getChannel());
+            $this->slackPost->post($this->comeback->render());
         }
     }
     
