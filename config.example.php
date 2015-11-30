@@ -4,6 +4,7 @@ $config = array(
 	'posturl' => '',
     'username' => 'scoreBot',
     'channel' => '#general',
+    'token' => '',
     'users' => realpath(dirname(__FILE__)) . '/data/users.json',
    
     'phrases' => [

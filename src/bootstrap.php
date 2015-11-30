@@ -47,6 +47,7 @@ error_reporting(-1);
     $dice->addRule(
         '\SlackScore\Main', 
         [
+            'constructParams' => [$config['token']],
             'substitutions' => [
                 'SlackScore\Repository\IUserRepository' => ['instance' => '\SlackScore\Repository\JsonUserRepository']
             ]

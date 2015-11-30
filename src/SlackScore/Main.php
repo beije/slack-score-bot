@@ -15,17 +15,24 @@
         protected $request;
         protected $slackPost;
         protected $comeback;
+        protected $token;
         
-        function __construct(Request $request, Command $command, Comeback $comeback, IUserRepository $repository, SlackPost $slackPost) {
+        function __construct($token, Request $request, Command $command, Comeback $comeback, IUserRepository $repository, SlackPost $slackPost) {
             $this->request = $request;
             $this->command = $command;
             $this->comeback = $comeback;
             $this->repository = $repository;
             $this->slackPost = $slackPost;
+            $this->token = $token;
         }
         
         
         public function handle() {
+            if($token && $this->request->token !== $token) {
+                echo 'Not allowed';
+                die();
+            }
+            
             if($this->request->text === 'list') {
                 echo ScoreBoard::render($this->repository->getUsers());
                 die();
