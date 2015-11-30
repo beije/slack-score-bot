@@ -26,7 +26,7 @@
         
         
         public function handle() {
-            if($this->request->command === '/score list') {
+            if($this->request->text === 'list') {
                 echo ScoreBoard::render($this->repository->getUsers());
                 die();
             }
