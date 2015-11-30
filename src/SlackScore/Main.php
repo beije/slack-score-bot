@@ -3,17 +3,21 @@
     
     use SlackScore\Utils\Command;
     use SlackScore\Utils\Comeback;
+    use SlackScore\Models\Request;
     use SlackScore\Utils\SlackPost;
+    use SlackScore\Utils\ScoreBoard;
     use SlackScore\Repository\IUserRepository;
 
     
     class Main {
         protected $command;
         protected $repository;
+        protected $request;
         protected $slackPost;
         protected $comeback;
         
-        function __construct(Command $command, Comeback $comeback, IUserRepository $repository, SlackPost $slackPost) {
+        function __construct(Request $request, Command $command, Comeback $comeback, IUserRepository $repository, SlackPost $slackPost) {
+            $this->request = $request;
             $this->command = $command;
             $this->comeback = $comeback;
             $this->repository = $repository;
@@ -22,6 +26,11 @@
         
         
         public function handle() {
+            if($this->request->command === '/score list') {
+                echo ScoreBoard::render($this->repository->getUsers());
+                die();
+            }
+            
             if(!$this->command->isValidCommand()) {
                 echo 'Invalid command';
                 die();

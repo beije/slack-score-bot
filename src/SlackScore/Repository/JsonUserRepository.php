@@ -37,7 +37,9 @@
             
             return false;
         }
-        
+        public function getUsers() {
+            return $this->users;
+        }
         public function addUser($name, $aliases = [], $score) {
             if($this->getByName($name)) {
                 return $this->getByName($name);
