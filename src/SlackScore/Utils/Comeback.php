@@ -29,7 +29,7 @@
             
             return str_replace(
                 [':from', ':to', ':score'],
-                ['@' . $fromUser->name . ' (' . $fromUser->score . ')', '@' . $toUser->name . ' (' . $toUser->score . ')', $this->command->scoreChange()],
+                ['@' . $fromUser->name, '@' . $toUser->name, $this->command->scoreChange()],
                 $phrase
             );
         }
