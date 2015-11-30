@@ -27,6 +27,7 @@ error_reporting(-1);
     $dice->addRule(
         '\SlackScore\Repository\JsonUserRepository', 
         [
+            'shared'          => true,
             'constructParams' => [$config['users']],
             'substitutions' => ['SlackScore\Storage\IStorage' => ['instance' => '\SlackScore\Storage\FileSystem']]
         ]
