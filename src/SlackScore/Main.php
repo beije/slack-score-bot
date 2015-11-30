@@ -22,8 +22,6 @@
         
         
         public function handle() {
-            echo 'Hej :)';
-
             if(!$this->command->isValidCommand()) {
                 echo 'Invalid command';
                 die();
