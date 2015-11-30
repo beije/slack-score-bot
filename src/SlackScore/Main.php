@@ -32,12 +32,12 @@
             $scoreChange = $this->command->scoreChange();
             
             if($fromUser === $toUser) {
-                echo 'Same user, nope.';
+                echo "You can't modify your own score, silly.";
                 return;
             }
             
             if(!$scoreChange) {
-                echo 'No score lol.';
+                echo "The score hasn't changed";
                 return;
             }
             
