@@ -52,7 +52,7 @@
         }
         
         public function save() {
-            $file = $this->storage->put($this->path, json_encode($this->users));
+            $file = $this->storage->put($this->path, json_encode($this->users, JSON_PRETTY_PRINT));
         }
     }
 ?>
