@@ -6,6 +6,10 @@
         private $path;
         protected $users = [];
         
+        private function compareScore($a, $b) {
+            return $b->score - $a->score;
+        }
+        
         public function __construct($path, \SlackScore\Storage\IStorage $storage) {
             $this->path = $path;
             $this->storage = $storage;
@@ -26,6 +30,8 @@
             foreach($json as $userObject) {
                 $this->addUser($userObject->name, $userObject->alias, $userObject->score);
             }
+            
+            usort($this->users, array($this, 'compareScore'));
         }
         
         public function getByName($name) {
