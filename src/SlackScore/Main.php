@@ -28,7 +28,7 @@
         
         
         public function handle() {
-            if($token && $this->request->token !== $token) {
+            if($this->token && $this->request->token !== $this->token) {
                 echo 'Not allowed';
                 die();
             }
