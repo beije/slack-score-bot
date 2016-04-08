@@ -35,6 +35,14 @@ error_reporting(-1);
 
     
     $dice->addRule(
+        '\SlackScore\Repository\SlackUserRepository', 
+        [
+            'shared'          => true,
+            'constructParams' => [$config['botToken']]
+        ]
+    );
+    
+    $dice->addRule(
         '\SlackScore\Utils\Comeback', 
         [
             'constructParams' => [$config['phrases']],
