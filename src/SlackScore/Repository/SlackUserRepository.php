@@ -13,8 +13,6 @@
             // If no token has been given, assume that it has been loaded.
             if($this->token) {
                 $this->load();
-            } else {
-                $this->loaded = true;
             }
         }
         
