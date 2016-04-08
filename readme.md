@@ -34,8 +34,8 @@ The `/data/users.json` file is just a json file with an array of objects, each o
         {
             "name": "fooBar", // The slack name
             "score": -5, // The current score
-            "alias": [ // additional names that this user should respond to
-                "foo bar",
+            "alias": [ // additional names that this user should respond to, these may NOT contain whitespaces!
+                "foobar",
                 "foo",
                 "bar"
             ]
