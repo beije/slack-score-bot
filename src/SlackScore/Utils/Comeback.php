@@ -27,6 +27,10 @@
             $toUser = $this->repository->getByName($this->command->toUserName());
             $scoreChange = $this->command->scoreChange();
             
+            if($this->command->getMessage()) {
+                return '@' . $fromUser->name . ': ' . $this->command->getMessage() . ' (@' . $toUser->name . ' ' . $this->command->scoreChange() . ')';
+            }
+            
             return str_replace(
                 [':from', ':to', ':score'],
                 ['@' . $fromUser->name, '@' . $toUser->name, $this->command->scoreChange()],

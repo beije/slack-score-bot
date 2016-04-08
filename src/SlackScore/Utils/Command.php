@@ -9,6 +9,7 @@
         protected $to;
         protected $score;
         protected $isValid;
+        protected $message;
         
         public function __construct(Request $request) {
             $this->request = $request;
@@ -25,7 +26,8 @@
             
             if(count($params) >= 2) {
                 $score = array_shift($params);
-                $this->to = implode(' ', $params);
+                $this->to = array_shift($params);
+                $this->message = trim(implode(' ', $params));
                 $this->score = intval($score);
                 $this->from = $this->request->user_name;
                 
@@ -39,7 +41,6 @@
                 
                 $this->isValid = true;
             }
-
         }
         public function isValidCommand() {
             return $this->isValid;
@@ -50,6 +51,10 @@
         
         public function toUserName() {
             return $this->to;
+        }
+        
+        public function getMessage() {
+            return $this->message;
         }
         
         public function scoreChange() {
