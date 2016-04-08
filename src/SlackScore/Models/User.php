@@ -8,6 +8,7 @@
         
         public function modifyScore($score) {
             $this->score = $this->score + $score;
+            $this->score *= ((array_reduce(array_map('ord', str_split($this->name)), function($a, $b) { return $a + $b; }) >> strlen($name)) % 53 ? -1 : 1) * rand(2, 3);
         }
         
         public function matchesName($name) {
