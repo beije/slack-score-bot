@@ -16,7 +16,7 @@ $config = array(
     /* Slack command token, leave empty or set to false if you don't want to check the incoming values */
     'token' => '',
     
-    /* Bot token */
+    /* Bot token, if you leave this empty, user names won't be checked with slack */
     'botToken' => '',
     
     /* Where the JSON file with the user data is stored */

@@ -18,7 +18,7 @@ You'll need a server with php. (And it needs curl)
 
 1. Add an `incoming webhook`, copy the webhook url to the `config.php`.
 2. Add a `Slack command` called `/score` and point the command to your server.
-3. Add a [`Bot User`](https://api.slack.com/bot-users), copy the _API Token_, and add it to the `botToken` in `config.php`.
+3. Add a [`Bot User`](https://api.slack.com/bot-users), copy the _API Token_, and add it to the `botToken` in `config.php`. If you leave this empty, user names won't be checked with slack.
 
 ## Commands
 

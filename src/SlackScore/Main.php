@@ -50,6 +50,9 @@
             $toUser = $this->repository->getByName($this->command->toUserName());
             $scoreChange = $this->command->scoreChange();
             
+            // Check if user exists, if repository hasn't loaded, default to true (so you can add users)
+            $userExistsInSlack = ($this->slackUserRepository->hasLoaded() ? $this->slackUserRepository->getByName($this->command->toUserName()) : true);
+            
             if($fromUser === $toUser) {
                 echo "You can't modify your own score, silly.";
                 return;
@@ -62,7 +65,7 @@
             
             if($toUser) {
                 $toUser->modifyScore($scoreChange);
-            } else if($this->slackUserRepository->getByName($this->command->toUserName())) {
+            } else if($userExistsInSlack) {
                 $this->repository->addUser($this->command->toUserName(), [], 0 + $scoreChange);
             } else {
                 echo "Can't add score to a non-existing user.";

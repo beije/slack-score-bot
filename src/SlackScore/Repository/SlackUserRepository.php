@@ -3,12 +3,19 @@
     
     class SlackUserRepository implements \SlackScore\Repository\IUserRepository {
         const END_POINT = 'https://slack.com/api/users.list';
-        protected $token;
-        protected $users;
+        protected $token = '';
+        protected $users = [];
+        protected $loaded = false;
         
         public function __construct($token) {
             $this->token = $token;
-            $this->load();
+            
+            // If no token has been given, assume that it has been loaded.
+            if($this->token) {
+                $this->load();
+            } else {
+                $this->loaded = true;
+            }
         }
         
         protected function load() {
@@ -25,7 +32,12 @@
                 throw new \Exception('Could not fetch users: '. $response->error);
             }
             
+            $this->loaded = true;
             $this->users = $response->members;
+        }
+        
+        public function hasLoaded() {
+            return $this->loaded;
         }
         
         
