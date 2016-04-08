@@ -7,6 +7,7 @@
     use SlackScore\Utils\SlackPost;
     use SlackScore\Utils\ScoreBoard;
     use SlackScore\Repository\IUserRepository;
+    use SlackScore\Repository\SlackUserRepository;
 
     
     class Main {
@@ -16,14 +17,16 @@
         protected $slackPost;
         protected $comeback;
         protected $token;
+        protected $slackUserRepository;
         
-        function __construct($token, Request $request, Command $command, Comeback $comeback, IUserRepository $repository, SlackPost $slackPost) {
+        function __construct($token, Request $request, Command $command, Comeback $comeback, IUserRepository $repository, SlackPost $slackPost, SlackUserRepository $slackUserRepository) {
             $this->request = $request;
             $this->command = $command;
             $this->comeback = $comeback;
             $this->repository = $repository;
             $this->slackPost = $slackPost;
             $this->token = $token;
+            $this->slackUserRepository = $slackUserRepository;
         }
         
         
@@ -59,8 +62,11 @@
             
             if($toUser) {
                 $toUser->modifyScore($scoreChange);
-            } else {
+            } else if($this->slackUserRepository->getByName($this->command->toUserName())) {
                 $this->repository->addUser($this->command->toUserName(), [], 0 + $scoreChange);
+            } else {
+                echo "Can't add score to a non-existing user.";
+                return;
             }
             
             $this->repository->save();
