@@ -35,6 +35,8 @@
         }
         
         public function getByName($name) {
+            $name = str_replace('@', '', $name);
+            
             foreach($this->users as $user) {
                 if($user->matchesName($name)) {
                     return $user;

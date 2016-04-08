@@ -4,6 +4,7 @@
     interface IUserRepository {
         public function getByName($username);
         public function addUser($name, $aliases = [], $score);
+        public function getUsers();
         public function save();
     }
 ?>
